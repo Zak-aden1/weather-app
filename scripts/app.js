@@ -4,6 +4,8 @@ const details = document.querySelector('.details')
 const time = document.querySelector('img.time')
 const icon = document.querySelector('.icon img');
 
+const forecast = new Forecast()
+
 const updateUI = (data) => {
     const { cityDetail, weather } = data
 
@@ -46,7 +48,7 @@ cityForm.addEventListener('submit', (e) => {
     cityForm.reset()
 
     // update ui with new city
-    updateCity(cityValue)
+    forecast.updateCity(cityValue)
     .then((data) => updateUI(data))
     .catch((err) => console.log(err))
 
@@ -55,6 +57,6 @@ cityForm.addEventListener('submit', (e) => {
 })
 
 localStorage.getItem('city') ? (
-    updateCity(localStorage.getItem('city'))
+    forecast.updateCity(localStorage.getItem('city'))
     .then(data => updateUI(data))
 ) : null
